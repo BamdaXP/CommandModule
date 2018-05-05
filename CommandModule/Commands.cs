@@ -43,6 +43,13 @@ namespace Commands
 
         }
 
+        static public void DeleteCommand(string _cstring)
+        {
+            if (commandLib.ContainsKey(_cstring))
+            {
+                commandLib.Remove(_cstring);
+            }
+        }
 
         static public void Listen()
         {
@@ -80,10 +87,8 @@ namespace Commands
 
         public Command(string _input)
         {
-            //parameterStrings = new ArrayList();
             inputString = _input;
             
-
             string[] _splited = inputString.Split(seperator);
             commandString = _splited[0];
 
@@ -107,16 +112,14 @@ namespace Commands
                     Console.WriteLine("The command :{0}  was FOUND!!", commandString);
                     return commandLib[_libString];
                 }
-
             }
+
             Console.WriteLine("The command :{0}  was NOT found!!", commandString);
             return null;
         }
 
         public void Excute()
         {
-            //Object _paras = parameterStrings as Object;
-
             Func _func = FindFuncByCmdString(commandString);
 
             if (_func == null)
